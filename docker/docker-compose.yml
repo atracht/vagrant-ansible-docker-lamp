@@ -1,0 +1,10 @@
+php7:
+    image: atracht/php7
+    ports:
+        - 9000
+nginx:
+    image: atracht/nginx
+    links:
+        - php7
+    ports:
+        - 80:80
