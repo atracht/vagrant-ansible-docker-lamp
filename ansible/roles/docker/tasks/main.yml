@@ -10,13 +10,13 @@
   with_items:
    - apt-transport-https
    - ca-certificates
- 
+
 - name: Add Docker Key
   sudo: yes
   shell: apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
 - name: Add Docker Repo
-  shell: echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" >> /etc/apt/sources.list.d/docker.list 
+  shell: echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" >> /etc/apt/sources.list.d/docker.list
 
 - name: Install Docker
   apt: update_cache=yes name=docker-engine force=yes
@@ -37,5 +37,5 @@
 - name: Install docker compose
   pip:
     name: docker-compose
-    version: 1.5.1
+    version: 1.7.0
     state: present
