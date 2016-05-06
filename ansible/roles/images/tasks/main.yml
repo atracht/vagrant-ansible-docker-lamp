@@ -1,0 +1,10 @@
+---
+# tasks file for images
+- name: Build nginx image
+  command: docker build -t atracht/nginx /docker/nginx
+
+- name: Build php7 image
+  command: docker build -t atracht/php7 /docker/php7
+
+- name: Docker compose start
+  shell: docker-compose -f /docker/docker-compose.yml up -d
