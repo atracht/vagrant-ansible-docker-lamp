@@ -6,5 +6,8 @@
 - name: Build php7 image
   command: docker build -t atracht/php7 /docker/php7
 
+- name: Build MySQL image
+  command: docker build -t atracht/mysql /docker/mysql
+
 - name: Docker compose start
   shell: docker-compose -f /docker/docker-compose.yml up -d
