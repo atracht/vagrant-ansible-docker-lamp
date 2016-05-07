@@ -6,6 +6,8 @@ php7:
       - /www/php7/php.ini:/usr/local/etc/php/php.ini
     volumes_from:
         - data
+    ports:
+        - 9000
 nginx:
     image: atracht/nginx
     volumes:
