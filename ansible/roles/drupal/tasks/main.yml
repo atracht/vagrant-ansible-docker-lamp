@@ -1,0 +1,27 @@
+---
+# tasks file for drupal
+- name: Download Drupal
+  shell: docker exec docker_php7_1 /bin/bash -c 'cd /usr/share/nginx/html/default; drupal site:new public 8.1.0'
+
+- name: Create Drupal database
+  shell: >
+    docker exec docker_mysql_1 /bin/bash -c
+    'mysqladmin -u root -proot create drupal2'
+
+- name: Install Drupal
+  shell: >
+    docker exec docker_php7_1 /bin/bash -c
+    'cd /usr/share/nginx/html/default/public;
+    drupal site:install standard
+    --site-name="Drupal 8"
+    --langcode="en"
+    --db-prefix="db_"
+    --db-type=mysql
+    --db-port=3306
+    --db-host=mysql
+    --db-user=root
+    --db-pass="root"
+    --db-name=drupal2
+    --site-mail=admin@example.com
+    --account-name=admin
+    --account-mail=admin@example.com --account-pass=admin'
