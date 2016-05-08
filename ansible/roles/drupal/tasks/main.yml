@@ -1,7 +1,7 @@
 ---
 # tasks file for drupal
 
-- name: Delete Drupal directory
+- name: Delete Drupal directory if exists
   file: path=/www/html/default/public state=absent
 
 - name: Download Drupal
@@ -32,7 +32,7 @@
     --account-mail=admin@example.com
     --account-pass=admin'
 
-- name: Download and Enable Drupal Redis module
+- name: Download and enable Drupal Redis module
   shell: >
     docker exec docker_php7_1 /bin/bash -c
     'cd /usr/share/nginx/html/default/public/modules;
