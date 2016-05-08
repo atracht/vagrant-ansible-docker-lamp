@@ -35,7 +35,7 @@ varnish:
     links:
         - nginx
 redis:
-    image: redis
+    image: atracht/redis
 data:
     image: busybox
     volumes:

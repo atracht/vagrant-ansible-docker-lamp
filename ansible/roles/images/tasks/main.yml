@@ -9,5 +9,8 @@
 - name: Build MySQL image
   command: docker build -t atracht/mysql /docker/mysql
 
+- name: Build redis image
+  command: docker build -t atracht/redis /docker/redis
+
 - name: Docker compose start
   shell: docker-compose -f /docker/docker-compose.yml up -d
