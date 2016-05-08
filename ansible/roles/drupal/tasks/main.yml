@@ -6,7 +6,10 @@
 - name: Create Drupal database
   shell: >
     docker exec docker_mysql_1 /bin/bash -c
-    'mysqladmin -u root -proot create drupal2'
+    'mysqladmin
+    -u root
+    -proot
+    create drupal'
 
 - name: Install Drupal
   shell: >
@@ -21,7 +24,7 @@
     --db-host=mysql
     --db-user=root
     --db-pass="root"
-    --db-name=drupal2
+    --db-name=drupal
     --site-mail=admin@example.com
     --account-name=admin
     --account-mail=admin@example.com --account-pass=admin'
