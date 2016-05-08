@@ -2,6 +2,7 @@ php7:
     image: atracht/php7
     links:
         - mysql
+        - redis
     volumes:
       - /www/php7/php.ini:/usr/local/etc/php/php.ini
     volumes_from:
@@ -33,6 +34,8 @@ varnish:
         - 80:80
     links:
         - nginx
+redis:
+    image: redis
 data:
     image: busybox
     volumes:
