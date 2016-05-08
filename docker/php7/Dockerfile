@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
         libmcrypt-dev \
         libpng12-dev \
         wget \
+        git \
     && docker-php-ext-install -j$(nproc) iconv mcrypt pdo_mysql opcache \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
@@ -18,10 +19,6 @@ RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/ph
 
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
-
-# Install Drush 8 (master) as phar.
-RUN wget http://files.drush.org/drush.phar
-RUN mv drush.phar /usr/local/bin/drush && chmod +x /usr/local/bin/drush
 
 # Install Drupal Console.
 RUN curl http://drupalconsole.com/installer -L -o drupal.phar
