@@ -18,13 +18,21 @@ nginx:
     links:
         - php7
     ports:
-      - 80:80
+      - 8080
 mysql:
     image: atracht/mysql
     environment:
         MYSQL_ROOT_PASSWORD: root
     ports:
         - 127.0.0.1:3306:3306
+varnish:
+    image: million12/varnish
+    volumes:
+        - /www/varnish/default.vcl:/etc/varnish/default.vcl
+    ports:
+        - 80:80
+    links:
+        - nginx
 data:
     image: busybox
     volumes:
