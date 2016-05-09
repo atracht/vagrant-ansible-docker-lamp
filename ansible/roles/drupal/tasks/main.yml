@@ -4,6 +4,9 @@
 - name: Delete Drupal directory if exists
   file: path=/www/html/default/public state=absent
 
+- name: Create Sites directory
+  file: path=/www/html/default state=directory
+
 - name: Download Drupal
   shell: docker exec docker_php7_1 /bin/bash -c 'cd /usr/share/nginx/html/default; drupal site:new public 8.1.0'
 
