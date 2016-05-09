@@ -1,0 +1,49 @@
+---
+# tasks file for drupal
+
+- name: Delete Drupal directory if exists
+  file: path=/www/html/default/public state=absent
+
+- name: Download Drupal
+  shell: docker exec docker_php7_1 /bin/bash -c 'cd /usr/share/nginx/html/default; drupal site:new public 8.1.0'
+
+- name: Delete Drupal database if exists
+  mysql_db: name=drupal state=absent login_host=127.0.0.1 login_user=root login_password=root
+
+- name: Create Drupal database
+  mysql_db: name=drupal state=present login_host=127.0.0.1 login_user=root login_password=root
+
+- name: Install Drupal
+  shell: >
+    docker exec docker_php7_1 /bin/bash -c
+    'cd /usr/share/nginx/html/default/public;
+    drupal site:install standard
+    --site-name="Drupal 8"
+    --langcode="en"
+    --db-prefix="db_"
+    --db-type=mysql
+    --db-port=3306
+    --db-host=mysql
+    --db-user=root
+    --db-pass="root"
+    --db-name=drupal
+    --site-mail=admin@example.com
+    --account-name=admin
+    --account-mail=admin@example.com
+    --account-pass=admin'
+
+- name: Download and enable Drupal Redis module
+  shell: >
+    docker exec docker_php7_1 /bin/bash -c
+    'cd /usr/share/nginx/html/default/public/modules;
+    git clone -b 8.x-1.x git://github.com/md-systems/redis.git redis;
+    cd /usr/share/nginx/html/default/public;
+    drupal module:install redis'
+
+- name: Add redis settings to Drupal settings.php
+  blockinfile:
+    dest: /www/html/default/public/sites/default/settings.php
+    block: |
+      $settings['redis.connection']['interface'] = 'PhpRedis';
+      $settings['redis.connection']['host'] = 'redis';
+      $settings['cache']['default'] = 'cache.backend.redis';
