@@ -26,6 +26,8 @@ mysql:
         MYSQL_ROOT_PASSWORD: root
     ports:
         - 127.0.0.1:3306:3306
+    volumes:
+        - /www/mysql/config:/etc/mysql/conf.d
 varnish:
     image: million12/varnish
     volumes:
