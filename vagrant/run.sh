@@ -1,16 +1,7 @@
 #!/bin/bash
 
-# Allow script to be run without input
-sudo DEBIAN_FRONTEND=noninteractive
+sudo pacman -Syu
 
-# Update and intall repositories
-sudo apt-get update
-sudo apt-get -y install software-properties-common
+sudo pacman -S ansible --noconfirm
 
-# Install Ansible
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt-get update
-sudo apt-get -y install ansible
-
-# Run Ansible provisioning script
 sudo ansible-playbook /ansible/playbook.yml
