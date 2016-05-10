@@ -1,2 +1,3 @@
 .vagrant*
 www/html/default/*
+.DS_Store

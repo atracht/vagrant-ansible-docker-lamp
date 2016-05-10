@@ -1,7 +1,7 @@
 ---
 # tasks file for firewall
-- name: Install required software
-  apt: update_cache=yes name=ufw
+- name: Install UFW
+  pacman: update_cache=yes name=ufw
 
 - name: Allow SSH
   ufw: rule=allow port=22 proto=tcp

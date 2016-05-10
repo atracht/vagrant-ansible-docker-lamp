@@ -1,6 +1,6 @@
 #vagrant-ansible-docker-lemp
 
-This is a proof of concept development workflow using Vagrant, Ansible, Docker and LEMP. I haven't used any of these tools together before, so it's an exercise in seeing how they work together.
+This is a proof of concept development workflow using Vagrant, Ansible, Docker and LEMP. I haven't used any of these tools before, so it's an exercise in seeing how they work together.
 
 ### Requirements
 1. Virtualbox
@@ -13,6 +13,7 @@ $ cd [repository]
 $ vagrant up
 ```
 Visit http://192.168.33.10
+Login admin/admin
 
 ### Workflow
 1. Vagrant - Install Ansible
