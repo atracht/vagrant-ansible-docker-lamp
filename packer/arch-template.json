@@ -7,7 +7,9 @@
         "iso_url": "https://mirrors.kernel.org/archlinux/iso/2016.05.01/archlinux-2016.05.01-dual.iso",
         "iso_checksum_url": "https://mirrors.kernel.org/archlinux/iso/2016.05.01/sha1sums.txt",
         "iso_checksum_type": "sha1",
-        "ssh_timeout": "20m"
+        "ssh_timeout": "20m",
+        "atlas_username": "{{env `ATLAS_USERNAME`}}",
+        "atlas_name": "{{env `ATLAS_NAME`}}"
     },
     "builders": [
         {
@@ -55,11 +57,11 @@
         {
             "type": "atlas",
             "only": ["virtualbox-iso"],
-            "artifact": "atracht/arch",
+            "artifact": "{{user `atlas_username`}}/{{user `atlas_name`}}",
             "artifact_type": "vagrant.box",
             "metadata": {
                 "provider": "virtualbox",
-                "version": "0.0.5"
+                "version": "0.0.11"
             }
         }]
     ]
