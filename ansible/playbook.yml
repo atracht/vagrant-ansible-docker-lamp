@@ -2,7 +2,6 @@
   become: yes
   become_method: sudo
   roles:
-    - { role: docker, tags: ['docker'] }
     - { role: firewall, tags: ['firewall'] }
     - { role: images, tags: ['images'] }
     - { role: drupal, tags: ['drupal'] }
