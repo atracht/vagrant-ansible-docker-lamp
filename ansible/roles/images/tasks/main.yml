@@ -1,16 +1,19 @@
 ---
 # tasks file for images
-- name: Build nginx image
-  command: docker build -t atracht/nginx /docker/nginx
+- name: Pull nginx image
+  command: docker pull nginx:alpine
 
-- name: Build php7 image
-  command: docker build -t atracht/php7 /docker/php7
+- name: Pull php7 Image
+  command: docker pull atracht/php7
 
-- name: Build MySQL image
-  command: docker build -t atracht/mysql /docker/mysql
+- name: Pull MySQL Image
+  command: docker pull mariadb
 
-- name: Build redis image
-  command: docker build -t atracht/redis /docker/redis
+- name: Pull Redis Image
+  command: docker pull redis
+
+- name: Pull Varnish Image
+  command: docker pull million12/varnish
 
 - name: Docker compose start
   shell: docker-compose -f /docker/docker-compose.yml up -d
