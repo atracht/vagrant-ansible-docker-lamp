@@ -1,38 +1,10 @@
 ---
 # tasks file for docker
-- name: Update apt cache
-  apt: update_cache=yes cache_valid_time=3600
-
-- name: Install required software
-  apt: name={{ item }} state=present
-  with_items:
-   - apt-transport-https
-   - ca-certificates
-   - python-mysqldb
-
-- name: Add Docker Key
-  shell: apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-
-- name: Add Docker Repo
-  shell: echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" >> /etc/apt/sources.list.d/docker.list
-
 - name: Install Docker
-  apt: update_cache=yes name=docker-engine force=yes
+  pacman: name=docker,docker-compose,mysql-python update_cache=yes
 
-- name: Add Vagrant user to Docker
-  shell: usermod -aG docker vagrant
+- name: Enable Docker
+  service: name=docker state=started
 
-- name: Install Python Setuptools
-  action: "{{ ansible_pkg_mgr }} pkg={{ item }} state=present"
-  with_items:
-    - python-setuptools
-
-- name: Install pip
-  easy_install:
-    name: pip
-
-- name: Install docker compose
-  pip:
-    name: docker-compose
-    version: 1.7.0
-    state: present
+- name: Add Vagrant user to Docker group
+  user: name=vagrant groups=docker append=yes
